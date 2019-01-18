@@ -14,7 +14,8 @@ app.use(cors());
 app.use(jwt());
 
 // api routes
-app.use('/api/user', require('./api/routes/user.routes'));
+app.use('/api/users', require('./api/routes/user.routes'));
+app.use('/api/items', require('./api/routes/item.routes'));
 
 // global error handler
 app.use(errorHandler);

@@ -18,14 +18,9 @@ function getAll(req, res, next) {
         .then(items => res.json(items))
         .catch(err => next(err));
 }
-function getAll(req, res, next) {
-    itemService.getAll()
-        .then(items => res.json(items))
-        .catch(err => next(err));
-}
 
 function insertItem(req,res,next){
-    itemService.create()
+    itemService.create(req.body)
     .then(items => res.json(items))
     .catch(err => next(err));
 }

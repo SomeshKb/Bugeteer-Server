@@ -26,13 +26,10 @@ async function create(itemParam) {
 
 async function update(id, itemParam) {
     const item = await Item.findById(id);
-
     // validate
     if (!item) throw 'Item not found';
-
     // copy itemParam properties to item
     Object.assign(item, itemParam);
-
     await item.save();
 }
 
