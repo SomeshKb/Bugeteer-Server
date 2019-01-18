@@ -35,7 +35,7 @@ async function getById(id) {
 }
 
 async function getNamesByID(id) {
-    return await User.find({_id:id},{firstName:1,lastName:1,username:1,_id:0})
+    return await User.find({_id:id},{firstName:1,lastName:1,username:1,_id:1})
 }
 
 async function create(userParam) {
