@@ -5,7 +5,7 @@ const userService = require('../controller/user.service');
 // user routes
 router.post('/authenticate', authenticate);
 router.post('/register', register);
-router.get('/', getAll);
+router.get('/all', getAll);
 router.get('/current', getCurrent);
 router.get('/details/:id', getNamesByID);
 router.get('/:id', getById);

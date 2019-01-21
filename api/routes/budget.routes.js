@@ -4,7 +4,7 @@ const budgetService = require('../controller/budget.service');
 
 // budget routes
 
-router.get('/', getAll);
+router.get('/all', getAll);
 router.get('/:id', getById);
 router.post('/add',insertItem)
 router.put('/:id', update);

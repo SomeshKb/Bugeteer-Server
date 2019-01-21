@@ -11,7 +11,7 @@ const schema = new Schema({
         default: Date.now
     },
     cost: {
-        type: String,
+        type: Number,
         required: true
     },
     description: {
