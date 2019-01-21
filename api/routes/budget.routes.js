@@ -1,8 +1,8 @@
 ﻿const express = require('express');
 const router = express.Router();
-const itemService = require('../controller/item.service');
+const budgetService = require('../controller/budget.service');
 
-// item routes
+// budget routes
 
 router.get('/', getAll);
 router.get('/:id', getById);
@@ -14,31 +14,31 @@ module.exports = router;
 
 
 function getAll(req, res, next) {
-    itemService.getAll()
-        .then(items => res.json(items))
+    budgetService.getAll()
+        .then(budgets => res.json(budgets))
         .catch(err => next(err));
 }
 
 function insertItem(req,res,next){
-    itemService.create(req.body)
-    .then(items => res.json(items))
+    budgetService.create(req.body)
+    .then(budgets => res.json(budgets))
     .catch(err => next(err));
 }
 
 function getById(req, res, next) {
-    itemService.getById(req.params.id)
-        .then(item => item ? res.json(item) : res.sendStatus(404))
+    budgetService.getById(req.params.id)
+        .then(budget => budget ? res.json(budget) : res.sendStatus(404))
         .catch(err => next(err));
 }
 
 function update(req, res, next) {
-    itemService.update(req.params.id, req.body)
+    budgetService.update(req.params.id, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
 }
 
 function _delete(req, res, next) {
-    itemService.delete(req.params.id)
+    budgetService.delete(req.params.id)
         .then(() => res.json({}))
         .catch(err => next(err));
 }
