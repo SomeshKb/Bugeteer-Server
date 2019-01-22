@@ -7,9 +7,11 @@ const schema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     createdDate: { type: Date, default: Date.now },
-    budgetBuyer: { type: Array}
+    budgetBuyer: { type: Array }
 });
 
 schema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('User', schema);
+
+
