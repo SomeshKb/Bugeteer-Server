@@ -27,7 +27,7 @@ async function authenticate({ username, password }) {
 }
 
 async function getAll() {
-    return await User.find().select('-hash');
+    return await User.find({},{firstName:1,lastName:1,username:1,_id:1,id:1});
 }
 
 async function getById(id) {
@@ -40,7 +40,7 @@ async function getNamesByID(id) {
 
 async function create(userParam) {
     // validate
-    if (await User.findOne({ username: userParam.username })) {
+    if (await User.findOne( { "username" : { $regex : new RegExp(userParam.username, "i") } } )    ) {
         throw 'Username "' + userParam.username + '" is already taken';
     }
 

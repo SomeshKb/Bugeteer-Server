@@ -29,9 +29,6 @@ const schema = new Schema({
     hasSettled: {
         type: Boolean,
         default: false
-    },
-    items: {
-        type:Array
     }
 });
 
