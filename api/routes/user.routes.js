@@ -46,9 +46,8 @@ function getById(req, res, next) {
 
 
 function getNamesByID(req, res, next) {
-    
     userService.getNamesByID(req.params.id)
-        .then(user => user ? res.json(user) : res.sendStatus(404))
+        .then(user =>{ user ? res.json(user[0]) : res.sendStatus(404)})
         .catch(err => next(err));
 }
 

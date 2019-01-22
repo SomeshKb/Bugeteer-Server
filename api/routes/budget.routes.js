@@ -6,7 +6,7 @@ const budgetService = require('../controller/budget.service');
 
 router.get('/all', getAll);
 router.get('/:id', getById);
-router.post('/add',insertItem)
+router.post('/add', insertItem)
 router.put('/:id', update);
 router.delete('/:id', _delete);
 
@@ -19,10 +19,19 @@ function getAll(req, res, next) {
         .catch(err => next(err));
 }
 
-function insertItem(req,res,next){
+function insertItem(req, res, next) {
     budgetService.create(req.body)
-    .then(budgets => res.json(budgets))
-    .catch(err => next(err));
+        .then(budgets => {
+            console.log(budgets);
+            budgetService.addBudgetToUser(budgets._id, budgets.buyer).then(result => {
+                res.send(result);
+            }).catch(err =>
+                next(err)
+            );
+        })
+        .catch(err =>
+            next(err)
+        );
 }
 
 function getById(req, res, next) {

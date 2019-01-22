@@ -1,13 +1,15 @@
 ﻿const config = require('config.json');
 const db = require('_helpers/db');
 const Budget = db.Item;
+const User = db.User;
 
 module.exports = {
     getAll,
     getById,
     create,
     update,
-    delete: _delete
+    delete: _delete,
+    addBudgetToUser
 };
 
 async function getAll() {
@@ -21,8 +23,20 @@ async function getById(id) {
 async function create(itemParam) {
     const budget = new Budget(itemParam);
     // save item
-    await budget.save();
+    return await budget.save();
+   
 }
+
+async function addBudgetToUser(id,buyer) {
+   return await User.updateOne({
+        _id: buyer
+    }, {
+        $addToSet: {
+            budgetBuyer: id
+        }
+    })
+}
+
 
 async function update(id, itemParam) {
     const budget = await Budget.findById(id);
