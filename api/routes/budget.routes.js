@@ -22,7 +22,6 @@ function getAll(req, res, next) {
 function insertItem(req, res, next) {
     budgetService.create(req.body)
         .then(budgets => {
-            console.log(budgets);
             budgetService.addBudgetToUser(budgets._id, budgets.buyer).then(result => {
                 res.send(result);
             }).catch(err =>
