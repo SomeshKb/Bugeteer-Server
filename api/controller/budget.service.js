@@ -9,7 +9,8 @@ module.exports = {
     create,
     update,
     delete: _delete,
-    addBudgetToUser
+    addBudgetToUser,
+    updateBudgetSettle
 };
 
 async function getAll() {
@@ -45,6 +46,15 @@ async function update(id, itemParam) {
     // copy itemParam properties to item
     Object.assign(budget, itemParam);
     await budget.save();
+}
+
+
+async function updateBudgetSettle(id,value){
+    const budget = await Budget.findById(id);
+    // validate
+    if (!budget) throw 'Budget not found';
+    // copy itemParam properties to item
+    await budget.update({_id:id},{$set:{hasSettled:true}});
 }
 
 async function _delete(id) {

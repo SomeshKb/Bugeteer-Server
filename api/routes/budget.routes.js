@@ -8,6 +8,7 @@ router.get('/all', getAll);
 router.get('/:id', getById);
 router.post('/add', insertItem)
 router.put('/:id', update);
+router.put('/settled/:id',hasSettled);
 router.delete('/:id', _delete);
 
 module.exports = router;
@@ -44,6 +45,14 @@ function update(req, res, next) {
         .then(() => res.json({}))
         .catch(err => next(err));
 }
+
+
+function hasSettled(req, res, next) {
+    budgetService.updateBudgetSettle(req.params.id, req.body)
+        .then(() => res.json({}))
+        .catch(err => next(err));
+}
+
 
 function _delete(req, res, next) {
     budgetService.delete(req.params.id)
