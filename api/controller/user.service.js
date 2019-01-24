@@ -14,8 +14,8 @@ module.exports = {
     delete: _delete
 };
 
-async function authenticate({ username, password }) {
-    const user = await User.findOne({ username });
+async function authenticate({ email, password }) {
+    const user = await User.findOne({ email });
     if (user && bcrypt.compareSync(password, user.hash)) {
         const { hash, ...userWithoutHash } = user.toObject();
         const token = jwt.sign({ sub: user.id }, config.secret);
@@ -27,7 +27,7 @@ async function authenticate({ username, password }) {
 }
 
 async function getAll() {
-    return await User.find({},{firstName:1,lastName:1,username:1,_id:1,id:1});
+    return await User.find({},{firstName:1,lastName:1,email:1,_id:1,id:1});
 }
 
 async function getById(id) {
@@ -35,13 +35,13 @@ async function getById(id) {
 }
 
 async function getNamesByID(id) {
-    return await User.find({_id:id},{firstName:1,lastName:1,username:1,_id:1})
+    return await User.find({_id:id},{firstName:1,lastName:1,email:1,_id:1})
 }
 
 async function create(userParam) {
     // validate
-    if (await User.findOne( { "username" : { $regex : new RegExp(userParam.username, "i") } } )    ) {
-        throw 'Username "' + userParam.username + '" is already taken';
+    if (await User.findOne( { "email" : { $regex : new RegExp(userParam.email, "i") } } )    ) {
+        throw 'Email "' + userParam.email + '" is already taken';
     }
 
     const user = new User(userParam);
@@ -60,8 +60,8 @@ async function update(id, userParam) {
 
     // validate
     if (!user) throw 'User not found';
-    if (user.username !== userParam.username && await User.findOne({ username: userParam.username })) {
-        throw 'Username "' + userParam.username + '" is already taken';
+    if (user.email !== userParam.email && await User.findOne({ email: userParam.email })) {
+        throw 'Email "' + userParam.email + '" is already taken';
     }
 
     // hash password if it was entered

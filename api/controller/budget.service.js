@@ -54,7 +54,7 @@ async function updateBudgetSettle(id){
     // validate
     if (!budget) throw 'Budget not found';
     // copy itemParam properties to item
-    await budget.update({_id:id},{$set:{hasSettled:true}});
+    await Budget.update({_id:id},{$set:{hasSettled:true}});
 }
 
 async function _delete(id) {
