@@ -49,7 +49,7 @@ async function update(id, itemParam) {
 }
 
 
-async function updateBudgetSettle(id,value){
+async function updateBudgetSettle(id){
     const budget = await Budget.findById(id);
     // validate
     if (!budget) throw 'Budget not found';
