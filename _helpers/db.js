@@ -5,5 +5,5 @@ mongoose.Promise = global.Promise;
 
 module.exports = {
     User: require('../api/model/user.model'),
-    Item: require('../api/model/item.model')
+    Item: require('../api/model/budget.model')
 };

@@ -1,7 +1,7 @@
 const user_routes=require('./routes/user.routes');
-const item_routes=require('./routes/item.routes');
+const budget_routes=require('./routes/budget.routes');
 
 module.exports = {
    user_routes,
-   item_routes
+   budget_routes
 };
